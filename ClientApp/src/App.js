@@ -9,8 +9,10 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import { Test } from './components/Test';
 import { OnOff } from './components/OnOff';
-import { BrandList } from './components/brand/BrandList';
-import { BrandCreate } from './components/brand/BrandCreate';
+import { Brand } from './components/brand/Brand';
+
+
+
 
 import './custom.css'
 
@@ -24,8 +26,7 @@ export default class App extends Component {
             <Route path='/counter' component={Counter} />
             <Route path='/test' component={Test} />
             <Route path='/onoff' component={OnOff} />
-            <Route path='/brand/brandlist' component={BrandList} />
-            <Route path='/brand/createbrand' component={BrandCreate} />
+            <Route path='/brand/brandlist' component={Brand} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>

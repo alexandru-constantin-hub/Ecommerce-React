@@ -44,11 +44,25 @@ namespace Ecommerce_React.Controllers
             return Ok(brands);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult Update(Brand brand)
         {
-            _context.Brands.Update(brand);
-            _context.SaveChanges();
+            try
+            {
+                Brand b = _context.Brands.FirstOrDefault(b => b.BrandId == brand.BrandId);
+                if (b != null)
+                {
+                    b.BrandName = brand.BrandName;
+                    _context.Brands.Update(brand);
+                    _context.SaveChanges();
+                }
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
             return Ok(brand);
         }
 
@@ -63,8 +77,22 @@ namespace Ecommerce_React.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            _context.Brands.Remove(new Brand { BrandId = id });
-            _context.SaveChanges();
+
+            try
+            {
+                Brand b = _context.Brands.FirstOrDefault(b => b.BrandId == id);
+                if (b != null)
+                {
+                    _context.Brands.Remove(b);
+                    _context.SaveChanges();
+                }
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
             return Ok(id);
         }
 
